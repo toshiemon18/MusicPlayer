@@ -1,0 +1,6 @@
+openFrameworks-Info.plist
+Project.xcconfig
+bin/
+obj/
+MusicPlayer.xcodeproj/
+MusicPlayer.qbs
