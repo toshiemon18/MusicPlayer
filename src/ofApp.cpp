@@ -43,9 +43,8 @@ void ofApp::keyReleased(int key){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-    float clickedPoint = (playButton.x-x)*(playButton.x-x) + (playButton.y-y)*(playButton.y-y);
-    bool isInternal = (clickedPoint <= radiusPlayButton*radiusPlayButton);
-    togglePlay(isPlay, isInternal);
+    ofVec2f p; p.set(x, y);
+    playButtonClickEvent(isPlay, p);
 }
 
 //--------------------------------------------------------------
@@ -102,4 +101,10 @@ void ofApp::displayPlayButton(bool isPlay, ofVec2f p, int radius) {
         }
         ofEndShape();
     }
+}
+
+void ofApp::playButtonClickEvent(bool isPlay, ofVec2f p) {
+    float clickedPoint = (playButton.x-p.x)*(playButton.x-p.x) + (playButton.y-p.y)*(playButton.y-p.y);
+    bool isInternal = (clickedPoint <= radiusPlayButton*radiusPlayButton);
+    togglePlay(isPlay, isInternal);
 }
