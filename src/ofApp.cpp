@@ -47,6 +47,7 @@ void ofApp::keyReleased(int key){
 void ofApp::mousePressed(int x, int y, int button){
     ofVec2f p; p.set(x, y);
     playButtonClickEvent(isPlay, p);
+    previousButtonClickEvent(previousButton, p);
 }
 
 //--------------------------------------------------------------
@@ -116,8 +117,8 @@ void ofApp::playButtonClickEvent(bool isPlay, ofVec2f p) {
 void ofApp::setPositionToHEAD(bool isInternal) {
     if (isInternal) {
         player.setPosition(0);
-        player.stop();
-        isPlay = false;
+        // player.stop();
+        // isPlay = false;
     }
 }
 
@@ -145,6 +146,8 @@ void ofApp::displayPreviousyButton(ofVec2f p) {
 }
 
 // -------------------------------------------------------------
-void ofApp::previousButtonClickEvent(ofVec2f p) {
-
+void ofApp::previousButtonClickEvent(ofVec2f p1, ofVec2f p2) {
+    bool isInternal (p1.x <= p2.x && p1.y <= p2.y &&
+                    p1.x+widthPreviousButton >= p2.x && p1.y+heightPreviousButton >= p2.y);
+    setPositionToHEAD(isInternal);
 }
