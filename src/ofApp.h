@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 
+
 class ofApp : public ofBaseApp{
 
 	public:
@@ -23,7 +24,10 @@ class ofApp : public ofBaseApp{
         float playPosition;
         ofVec2f playButton;
         int radiusPlayButton = 50;
+        const string macMusicDirPrefix   = "";
+        const string linuxMusicDirPrefix = "";
 
         // Own functions
         void togglePlay(bool isPlay, bool isInternal);
+        void displayPlayButton(bool isPlay, ofVec2f p, int radius);
 };
