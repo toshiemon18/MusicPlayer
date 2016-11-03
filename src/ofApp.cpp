@@ -12,6 +12,7 @@ void ofApp::setup(){
     isPlay = false;
     playPosition = 0;
     playButton.set(350, 150);
+    previousButton.set(150, 125);
 }
 
 //--------------------------------------------------------------
@@ -22,6 +23,7 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     displayPlayButton(isPlay, playButton, radiusPlayButton);
+    displayPreviousyButton(previousButton);
 }
 
 //--------------------------------------------------------------
@@ -103,8 +105,46 @@ void ofApp::displayPlayButton(bool isPlay, ofVec2f p, int radius) {
     }
 }
 
+// -------------------------------------------------------------
 void ofApp::playButtonClickEvent(bool isPlay, ofVec2f p) {
     float clickedPoint = (playButton.x-p.x)*(playButton.x-p.x) + (playButton.y-p.y)*(playButton.y-p.y);
     bool isInternal = (clickedPoint <= radiusPlayButton*radiusPlayButton);
     togglePlay(isPlay, isInternal);
+}
+
+// -------------------------------------------------------------
+void ofApp::setPositionToHEAD(bool isInternal) {
+    if (isInternal) {
+        player.setPosition(0);
+        player.stop();
+        isPlay = false;
+    }
+}
+
+// -------------------------------------------------------------
+void ofApp::displayPreviousyButton(ofVec2f p) {
+    ofSetColor(0);
+    ofFill();
+    ofRect(p, widthPreviousButton, heightPreviousButton);
+    ofSetColor(255);
+    float pi = 4.0 * atan(1.0);
+    ofVec2f c; c.set(p.x + 30, p.y + 25);
+    for (int i = 0; i < 2; i++) {
+        ofVec2f o; o.set(c.x + 25*i, c.y);
+        ofPushMatrix();
+        ofTranslate(o);
+        ofRotateZ(180);
+        ofBeginShape();
+            for (int i = 0; i < 3; i++) {
+                ofVertex(20 * cos((360*i/3)*(pi/180.0)),
+                        20 * sin((360*i/3)*(pi/180.0)));
+            }
+        ofEndShape();
+        ofPopMatrix();
+    }
+}
+
+// -------------------------------------------------------------
+void ofApp::previousButtonClickEvent(ofVec2f p) {
+
 }
