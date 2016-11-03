@@ -22,13 +22,17 @@ void ofApp::update(){
 void ofApp::draw(){
     if (!isPlay)  { ofSetColor(255); }
     else          { ofSetColor(0);   }
-    ofCircle(playButton, radiusOfPlayButton);
+    ofCircle(playButton, radiusPlayButton);
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    if (key == ' ') {
-        togglePlay(isPlay, true);
+
+    // if pressed the space key, toggle playing music
+    switch (key) {
+        case ' ':
+            togglePlay(isPlay, true);
+            break;
     }
 }
 
@@ -40,8 +44,8 @@ void ofApp::keyReleased(int key){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-    bool isInternal = ((playButton.x-x)*(playButton.x-x) +
-                        (playButton.y-y)*(playButton.y-y) <= radiusOfPlayButton*radiusOfPlayButton);
+    float clickedPoint = (playButton.x-x)*(playButton.x-x) + (playButton.y-y)*(playButton.y-y);
+    bool isInternal = (clickedPoint <= radiusPlayButton*radiusPlayButton);
     togglePlay(isPlay, isInternal);
 }
 
