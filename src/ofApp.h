@@ -30,4 +30,5 @@ class ofApp : public ofBaseApp{
         // Own functions
         void togglePlay(bool isPlay, bool isInternal);
         void displayPlayButton(bool isPlay, ofVec2f p, int radius);
+        void playButtonClickEvent(bool isPlay, ofVec2f p);
 };
