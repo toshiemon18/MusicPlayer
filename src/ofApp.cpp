@@ -5,6 +5,7 @@ void ofApp::setup(){
     // General settings
     ofEnableSmoothing();
     ofSetCircleResolution(64);
+    ofBackground(255);
 
     player.loadSound("05\ ROOKiEZ\ is\ PUNK\'D\ -\ IN\ MY\ WORLD.mp3");
     // Initialize parameters
