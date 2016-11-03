@@ -22,7 +22,7 @@ class ofApp : public ofBaseApp{
         bool isPlay;
         float playPosition;
         ofVec2f playButton;
-        int radiusOfPlayButton = 50;
+        int radiusPlayButton = 50;
 
         // Own functions
         void togglePlay(bool isPlay, bool isInternal);
