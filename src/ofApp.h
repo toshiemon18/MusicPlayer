@@ -38,5 +38,5 @@ class ofApp : public ofBaseApp{
         // Previous button
         void setPositionToHEAD(bool isInternal);
         void displayPreviousyButton(ofVec2f p);
-        void previousButtonClickEvent(ofVec2f p);
+        void previousButtonClickEvent(ofVec2f p1, ofVec2f p2);
 };
