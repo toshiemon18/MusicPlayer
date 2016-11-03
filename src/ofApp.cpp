@@ -20,9 +20,7 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    if (!isPlay)  { ofSetColor(255); }
-    else          { ofSetColor(0);   }
-    ofCircle(playButton, radiusPlayButton);
+    displayPlayButton(isPlay, playButton, radiusPlayButton);
 }
 
 //--------------------------------------------------------------
@@ -80,4 +78,11 @@ void ofApp::togglePlay(bool isPlayed, bool isInternal) {
         player.play();
         player.setPosition(playPosition);
     }
+}
+
+// -------------------------------------------------------------
+void ofApp::displayPlayButton(bool isPlay, ofVec2f p, int radius) {
+    if (!isPlay)  { ofSetColor(255); }
+    else          { ofSetColor(0);   }
+    ofCircle(p, radius);
 }
