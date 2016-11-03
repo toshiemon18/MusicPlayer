@@ -2,28 +2,34 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    player.loadSound("05\ ROOKiEZ\ is\ PUNK\'D\ -\ IN\ MY\ WORLD.mp3");
+    // General settings
+    ofEnableSmoothing();
+    ofSetCircleResolution(64);
 
+    player.loadSound("05\ ROOKiEZ\ is\ PUNK\'D\ -\ IN\ MY\ WORLD.mp3");
+    // Initialize parameters
+    isPlay = false;
+    playPosition = 0;
+    playButton.set(350, 150);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    // if (!isPlayed) {
-    //     player.play();
-    //     isPlayed = true;
-    // }
+
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    if (isPlayed) { ofSetColor(255); }
+    if (!isPlay)  { ofSetColor(255); }
     else          { ofSetColor(0);   }
-    ofCircle(100, 100, 50);
+    ofCircle(playButton, radiusOfPlayButton);
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+    if (key == ' ') {
+        togglePlay(isPlay, true);
+    }
 }
 
 //--------------------------------------------------------------
@@ -31,26 +37,12 @@ void ofApp::keyReleased(int key){
 
 }
 
-//--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y ){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button){
-
-}
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-    bool isInternal = ((100-x)*(100-x) + (100-y)*(100-y) <= 50*50);
-    if (isPlayed && isInternal) {
-        player.stop();
-        isPlayed = false;
-    } else if (!isPlayed && isInternal) {
-        player.play();
-        isPlayed = true;
-    }
+    bool isInternal = ((playButton.x-x)*(playButton.x-x) +
+                        (playButton.y-y)*(playButton.y-y) <= radiusOfPlayButton*radiusOfPlayButton);
+    togglePlay(isPlay, isInternal);
 }
 
 //--------------------------------------------------------------
@@ -69,16 +61,19 @@ void ofApp::mouseExited(int x, int y){
 }
 
 //--------------------------------------------------------------
-void ofApp::windowResized(int w, int h){
-
-}
-
-//--------------------------------------------------------------
 void ofApp::gotMessage(ofMessage msg){
 
 }
 
 //--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){
-
+void ofApp::togglePlay(bool isPlayed, bool isInternal) {
+    if (isPlay && isInternal) {
+        isPlay = false;
+        playPosition = player.getPosition();
+        player.stop();
+    } else if (!isPlay && isInternal) {
+        isPlay = true;
+        player.play();
+        player.setPosition(playPosition);
+    }
 }
