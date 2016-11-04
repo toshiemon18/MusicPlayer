@@ -147,7 +147,7 @@ void ofApp::displayPreviousyButton(ofVec2f p) {
 
 // -------------------------------------------------------------
 void ofApp::previousButtonClickEvent(ofVec2f p1, ofVec2f p2) {
-    bool isInternal (p1.x <= p2.x && p1.y <= p2.y &&
+    bool isInternal = (p1.x <= p2.x && p1.y <= p2.y &&
                     p1.x+widthPreviousButton >= p2.x && p1.y+heightPreviousButton >= p2.y);
     setPositionToHEAD(isInternal);
 }
